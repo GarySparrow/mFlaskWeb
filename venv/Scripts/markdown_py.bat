@@ -1,0 +1,1 @@
+@"c:\users\hasee\appdata\local\programs\python\python35\pythonprojects\venv\scripts\python.exe" "c:\users\hasee\appdata\local\programs\python\python35\pythonprojects\venv\Scripts\markdown_py" %*
