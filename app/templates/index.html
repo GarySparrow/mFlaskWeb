@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body %}
+    <!-- Page Header -->
+
+
+   <div class="container">
+    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+        {{ wtf.quick_form(form) }}
+        <br>
+    {% endif %}
+    </div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+
+                <div class="post-tabs">
+                    <ul class="nav nav-tabs">
+                        <li {% if not show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_all') }}">All</a></li>
+                        {% if current_user.is_authenticated %}
+                        <li {% if show_followed %} class="active"{% endif %}><a href="{{ url_for('.show_followed') }}">Followers</a></li>
+                        {% endif %}
+                    </ul>
+                    {% include '_posts.html' %}
+                </div>
+                {% if pagination %}
+                <div class="pagination">
+                    {{ macros.pagination_widget(pagination, '.index') }}
+                </div>
+                {% endif %}
+
+                <!--<div class="clearfix">-->
+                    <!--<a class="btn btn-secondary float-right" href="#">More Posts &rarr;</a>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery Version 3.1.1 -->
+    <script src="lib/jquery/jquery.js"></script>
+
+    <!-- Tether -->
+    <script src="lib/tether/tether.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+
+{% endblock %}
