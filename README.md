@@ -1,4 +1,4 @@
 Gary
 =======
-garymax.com
+[garymax.com](www.garymax.com)
 

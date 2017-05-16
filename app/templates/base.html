@@ -32,8 +32,17 @@
         {% block perhead %}
         {% endblock %}
 
-    </head>
 
+        <style>
+             ul
+            {
+                list-style-type: none;
+                padding: 0;
+            }
+        </style>
+
+
+    </head>
 
     <body>
         {% block nav %}
@@ -101,3 +110,7 @@
     </footer>
     </body>
 </html>
+
+{% block scripts %}
+{{ moment.include_moment() }}
+{% endblock %}
