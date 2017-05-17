@@ -12,7 +12,7 @@
             </div>
         </div>
         <br>
-        <div class="post-content">
+        <ul class="post-content">
 
             <div class="post-body">
                 {% if post.body_html %}
@@ -27,9 +27,11 @@
             {% endif %}
 
             {% if post.imgs_path %}
+                <!--<ul style="margin: 10px">-->
                 {% for img in post.imgs_path %}
                     <img src="{{ img }}" width="128" height="128"> </img>
                 {% endfor %}
+                <!--</ul>-->
             {% endif %}
 
             <div class="post-footer">

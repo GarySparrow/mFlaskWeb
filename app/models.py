@@ -374,7 +374,7 @@ class Post(db.Model):
 
     def to_json(self):
         # user = User.query.filter_by(id = self.author_id).first()
-        root = 'http://120.25.254.10/'
+        root = 'http://www.garymax.com/'
         video_path = None
         if self.video_path is not None and os.path.exists('app/' + self.video_path):
             video_path = root + self.video_path
