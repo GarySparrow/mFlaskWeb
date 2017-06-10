@@ -109,7 +109,9 @@ def new_post():
     db.session.commit()
     return jsonify({'posts': [post.to_json()],
                      'code': True,
-                     'followers': [user.to_json() for user in user.followers]})
+                     'followers': [User.query.filter_by(
+                         id=follow.follower_id).to_json()
+                        for follow in user.followers]})
 
 # @api.route('/posts/', methods=['POST'])
 # # @permission_required(Permission.WRITE_ARTICLES)
@@ -208,7 +210,8 @@ def like(id):
     user.like(post)
     return jsonify({
         'liked': True,
-        'code': True
+        'code': True,
+        'author': User.query.filter_by(id=post.author_id).first().to_json()
     })
 
 @api.route('/posts/<int:id>/unlike/', methods = ['POST'])

@@ -62,7 +62,7 @@ def follow(id):
     return jsonify({
         'followed': True,
         'code': True,
-        'poster': poster
+        'poster': poster.to_json()
     })
 
 @api.route('/users/<int:id>/unfollow/', methods = ['POST'])
