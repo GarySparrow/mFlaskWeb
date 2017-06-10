@@ -108,7 +108,8 @@ def new_post():
     db.session.add(post)
     db.session.commit()
     return jsonify({'posts': [post.to_json()],
-                     'code': True})
+                     'code': True,
+                     'followers': [user.followers.to_json()]})
 
 # @api.route('/posts/', methods=['POST'])
 # # @permission_required(Permission.WRITE_ARTICLES)

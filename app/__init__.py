@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_pagedown import PageDown
 from config import config
+# import paho.mqtt.client as mqtt
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -16,7 +17,22 @@ pagedown = PageDown()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
-
+#
+# def on_connect(client, userdata, flags, rc):
+#     print("Connected with result code " + str(rc))
+#
+#     client.subscribe("lettuce")
+#
+#
+# def on_message(client, userdata, msg):
+#     print(msg.topic + "" + str(msg.payload))
+#
+# client = mqtt.Client()
+# client.username_pw_set("admin", "password")
+# client.on_connect = on_connect
+# client.on_message = on_message
+#
+# HOST = "127.0.0.1"
 
 def create_app(config_name):
     app = Flask(__name__, static_url_path='')
@@ -29,6 +45,8 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     pagedown.init_app(app)
+    # client.connect(HOST, 61613, 60)
+    # client.loop_forever()
 
     if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
         from flask_sslify import SSLify

@@ -76,12 +76,15 @@ def new_post_comment(id):
     # body = request.json.get('body')
     # author_id = request.json.get('author_id')
     user = User.query.filter_by(id=author_id).first()
+    post = Post.query.filter_by(id=id).first()
+    post_author = User.query.filter_by(id=post.author_id).first()
     if author_id is None and not user.can(Permission.COMMENT):
         return jsonify({'code': False})
     comment = Comment(body=body, post_id=id, author_id=author_id)
     db.session.add(comment)
     db.session.commit()
     return jsonify({'code': True,
-                     'comments': [comment.to_json()]})
+                     'comments': [comment.to_json()],
+                     'post_author': post_author.to_json()})
 
 
