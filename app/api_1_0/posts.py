@@ -111,7 +111,7 @@ def new_post():
                      'code': True,
                      'followers': [User.query.filter_by(
                          id=follow.follower_id).to_json()
-                        for follow in user.followers]})
+                        for follow in user.followers.all()]})
 
 # @api.route('/posts/', methods=['POST'])
 # # @permission_required(Permission.WRITE_ARTICLES)
