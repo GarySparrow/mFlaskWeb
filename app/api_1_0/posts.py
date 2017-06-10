@@ -110,7 +110,7 @@ def new_post():
     return jsonify({'posts': [post.to_json()],
                      'code': True,
                      'followers': [User.query.filter_by(
-                         id=follow.follower_id).to_json()
+                         id=follow.follower_id).first().to_json()
                         for follow in user.followers.all()]})
 
 # @api.route('/posts/', methods=['POST'])
