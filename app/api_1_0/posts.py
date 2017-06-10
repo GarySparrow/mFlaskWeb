@@ -22,7 +22,7 @@ def get_posts():
     # next = None
     # if pagination.has_next:
     #     next = url_for('api.get_posts', page=page+1, _external=True)
-    posts = Post.query.all()
+    posts = Post.query.order_by(db.desc(Post.id)).all()
     return jsonify({
         'posts': [post.to_json() for post in posts],
         # 'prev': prev,
@@ -109,7 +109,7 @@ def new_post():
     db.session.commit()
     return jsonify({'posts': [post.to_json()],
                      'code': True,
-                     'followers': [user.followers.to_json()]})
+                     'followers': [user.to_json() for user in user.followers]})
 
 # @api.route('/posts/', methods=['POST'])
 # # @permission_required(Permission.WRITE_ARTICLES)
@@ -168,7 +168,7 @@ def get_user_followed_posts(id):
     # if pagination.has_next:
     #     next = url_for('api.get_user_followed_posts', page=page+1,
     #                    _external=True)
-    posts = user.followed_posts
+    posts = user.followed_posts.order_by(db.desc(Post.id)).all()
     return jsonify({
         'posts': [post.to_json() for post in posts],
         # 'prev': prev,

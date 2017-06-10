@@ -18,7 +18,7 @@ def get_comments():
     # next = None
     # if pagination.has_next:
     #     next = url_for('api.get_comments', page=page+1, _external=True)
-    comments = Comment.query.all()
+    comments = Comment.query.order_by(db.desc(Post.id)).all()
     return jsonify({
         'comments': [comment.to_json() for comment in comments],
         # 'prev': prev,
@@ -47,7 +47,7 @@ def get_post_comments(id):
     # next = None
     # if pagination.has_next:
     #     next = url_for('api.get_post_comments', page=page+1, _external=True)
-    comments = Comment.query.filter_by(post_id = post.id)
+    comments = Comment.query.filter_by(post_id = post.id).order_by(db.desc(Post.id)).all()
     return jsonify({
         'comments': [comment.to_json() for comment in comments],
         # 'prev': prev,
