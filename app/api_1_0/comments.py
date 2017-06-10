@@ -18,7 +18,7 @@ def get_comments():
     # next = None
     # if pagination.has_next:
     #     next = url_for('api.get_comments', page=page+1, _external=True)
-    comments = Comment.query.order_by(db.desc(Post.id)).all()
+    comments = Comment.query.order_by(db.desc(Comment.id)).all()
     return jsonify({
         'comments': [comment.to_json() for comment in comments],
         # 'prev': prev,
